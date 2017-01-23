@@ -34,18 +34,13 @@ ListNode* create(int n)
 }
 
 ListNode * mergeTwoLists(ListNode * l1, ListNode * l2) {
-  ListNode *tail, *head;
-  if (l1->val <= l2-> val)
+  if(!l2 && !l1)
   {
-    head = l1;
-    l1=l1->next;
+    return NULL;
   }
-  else
-  {
-    head = l2;
-    l2 = l2->next;
-  }
-  tail = head;
+  ListNode *tail, *head = NULL;
+  tail = new ListNode(0);
+  head = tail;
   while (l1 && l2) {
     if (l1 -> val < l2 -> val) {
       tail -> next = l1;
@@ -53,12 +48,11 @@ ListNode * mergeTwoLists(ListNode * l1, ListNode * l2) {
     } else {
       tail -> next = l2;
       l2 = l2 -> next;
-    }
-    tail = tail -> next;
+    }    
+    tail = tail -> next;    
   }
-
   tail -> next = l1 ? l1 : l2;
-  return head;
+  return head->next;
 }
 
 void printListNode(ListNode* s)
@@ -75,10 +69,11 @@ void printListNode(ListNode* s)
 int main()
 {
   cout<<"Enter 1st List:"<<endl;
-  ListNode* a = create(3);
+  ListNode* a = create(2);
   cout<<"Enter 2nd List:"<<endl;
-  ListNode* b = create(3);
+  ListNode* b = create(2);
   ListNode* ans = mergeTwoLists(a, b);
+  cout<<"Ans:"<<endl;
   printListNode(ans);
   return (0);
 }
